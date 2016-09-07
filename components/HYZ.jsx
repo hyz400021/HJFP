@@ -1,8 +1,9 @@
-const React = require('react');
-const ReactDOM = require('react-dom');
+import React from 'react';
+import ReactDOM from 'react-dom';
 require('../css/hyz.css');
 require("bootstrap-webpack");
 require('../css/font-awesome.min.css');
+import MyGrid from './myGrid.jsx';
 
 let guDingY;
 let guDingX;
@@ -15,11 +16,11 @@ class HJFP extends React.Component{
         this.handleMouseMove = this.handleMouseMove.bind(this);
         this.biaoQianCallBack=this.biaoQianCallBack.bind(this);
         this.state={
-            biaoQian:"我是标签哈哈哈"
+            biaoQian:"基本资料"
         }
     }
     render(){
-        let biaoQian = ["我是标签哈哈哈","你好吗","你好吗我是超长文本","扶贫图片"];
+        let biaoQian = ["基本资料","帮扶责任人及责任单位","帮扶对象家庭帮扶计划表","图片"];
         let aa = [];
         let bb = [];
         for(let i=0;i<biaoQian.length;i++){
@@ -33,33 +34,35 @@ class HJFP extends React.Component{
             //背景
             <div onMouseUp={this.handleMouseUp} onMouseMove={this.handleMouseMove} className="juedui" style={{backgroundColor:"rgba(0,0,0,.1)",overflow:"hidden"}}>
                 {/*内框  */}
-                <div ref="neiKuang" className="juedui" style={{width:"1111px",height:"520px"}}>
+                <div ref="neiKuang" className="juedui" style={{width:"1188px",height:"520px"}}>
                     {/*内框左  */}
                     <div className="pull-left container-fluid" style={{width:"200px",height:"100%",paddingTop:"43px"}}>
                         {aa}
                     </div>
                     {/*内框右  */}
-                    <div className="border1px" style={{marginLeft:"200px",height:"100%",backgroundColor:"#ffffff",boxShadow:"-5px 5px 5px #999"}}>
+                    <div className="border1px" style={{marginLeft:"200px",height:"100%",backgroundColor:"#ffffff",boxShadow:"-5px 5px 5px #999",borderLeft:"0px"}}>
                         {/*内框右-title  */}
-                        <div onMouseDown={this.handleMouseDown}  className="cursor-move" style={{height:"50px",backgroundColor:"#DDDDDD"}}></div>
-                        <div style={{height:"100%",padding:"20px",overflow:"auto"}}>
+                        <div onMouseDown={this.handleMouseDown}  className="cursor-move" style={{height:"50px",backgroundColor:"#DDDDDD",padding:"0px 20px 0px 20px"}}>
+                            <div className="pull-left" style={{lineHeight:"50px",fontSize:"18px",fontWeight:"bold"}}>新增资料</div>
+                        </div>
+                        <div className="" style={{height:"100%",padding:"20px",overflow:"auto"}}>
                             {
-                                this.state.biaoQian == "我是标签哈哈哈"?
+                                this.state.biaoQian == "基本资料"?
                                     <HJFPContentList1 foucs={true} />:<HJFPContentList1 foucs={false} />
                             }
 
                             {
-                                this.state.biaoQian == "你好吗"?
+                                this.state.biaoQian == "帮扶责任人及责任单位"?
                                     <HJFPContentList2 foucs={true} />:<HJFPContentList2 foucs={false} />
                             }
 
                             {
-                                this.state.biaoQian == "你好吗我是超长文本"?
+                                this.state.biaoQian == "帮扶对象家庭帮扶计划表"?
                                     <HJFPContentList3 foucs={true} />:<HJFPContentList2 foucs={false} />
                             }
 
                             {
-                                this.state.biaoQian == "扶贫图片"?
+                                this.state.biaoQian == "图片"?
                                     <HJFPContentList4 foucs={true} />:<HJFPContentList2 foucs={false} />
                             }
 
@@ -122,13 +125,13 @@ class HJFPBiaoQian extends  React.Component{
             <div>
                 {
                     this.props.foucs==false?
-                        <div className="row mp0" style={{margin:"8px -16px 0px 0px"}}>
-                            <button onClick={this.handleClick} className="btn btn-default btn-lg pull-right" style={{borderRadius:"0px",padding:"10px",border:"0px",outline:"none",background:"#aaa",color:"#fff",boxShadow:"-5px 5px 5px #999"}}>
+                        <div className="row mp0" style={{margin:"8px -15px 0px 0px"}}>
+                            <button onClick={this.handleClick} className="btn btn-default btn-lg pull-right" style={{borderRadius:"0px",padding:"10px",border:"0px",outline:"none",background:"#aaa",color:"#fff"}}>
                                 {this.props.name}
                             </button>
                         </div>
                         :
-                        <div className="row mp0" style={{margin:"8px -16px 0px 0px"}}>
+                        <div className="row mp0" style={{margin:"8px -15px 0px 0px"}}>
                             <button onClick={this.handleClick} className="btn btn-default btn-lg pull-right" style={{borderRadius:"0px",padding:"10px",border:"0px",outline:"none",background:"#fff",color:"#666",boxShadow:"-5px 5px 5px #999"}}>
                                 {this.props.name}
                             </button>
@@ -153,9 +156,8 @@ class HJFPContentList1 extends React.Component{
             aa = ""
         }
         return(
-            <div className={aa}>
-                <input className="form-control"/>
-                <input className="form-control"/>
+            <div className={aa} >
+                <MyGrid header={["标题1","标题1","标题1","标题1"]} widths={[2,2,2,6]} data={[[1,2,3,4],[2,3,4,5]]} />
             </div>
         )
     }
